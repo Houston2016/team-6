@@ -1,11 +1,15 @@
 package net.rmoreno.codeforgood;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -29,6 +33,18 @@ public class MainActivity extends Activity {
         testList.add("Hip hip horray");
         UpvoteAdapter adapter = new UpvoteAdapter(testList, this);
         upvoteRecyclerView.setAdapter(adapter);
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.attachToRecyclerView(upvoteRecyclerView);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, AddNote.class);
+//                intent.putExtra("EXTRA_FB_ACCESS_TOKEN", accessToken);
+//                startActivity(intent);
+            }
+        });
     }
 
 
