@@ -3,6 +3,7 @@ package net.rmoreno.codeforgood;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,14 @@ public class SigninDiaglogFragment extends DialogFragment {
 
         final EditText email = (EditText)view.findViewById(R.id.txt_signin_email);
         final Button signinButton = (Button)view.findViewById(R.id.btn_signin);
+
+        signinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProjectActivity.class);
+                startActivity(intent);
+            }
+        });
 
         builder.setView(view);
 

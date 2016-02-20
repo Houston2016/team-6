@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
 
     RecyclerView upvoteRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,12 +26,12 @@ public class MainActivity extends Activity {
         upvoteRecyclerView = (RecyclerView) findViewById(R.id.updvote_list);
         upvoteRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
         ArrayList<String> testList = new ArrayList<>();
         testList.add("Hello");
         testList.add("Does this work");
         testList.add("It does indeed");
         testList.add("Hip hip horray");
+
         UpvoteAdapter adapter = new UpvoteAdapter(testList, this);
         upvoteRecyclerView.setAdapter(adapter);
 
