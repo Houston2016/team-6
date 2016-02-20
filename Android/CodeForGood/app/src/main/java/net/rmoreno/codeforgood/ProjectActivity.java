@@ -1,7 +1,7 @@
 package net.rmoreno.codeforgood;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -9,29 +9,27 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
+public class ProjectActivity extends Activity {
 
-public class MainActivity extends Activity {
-
-    RecyclerView upvoteRecyclerView;
+    private RecyclerView projectList;
+    private ProjectAdapter adapter;
+    private ArrayList<String> projects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_project);
 
-        upvoteRecyclerView = (RecyclerView) findViewById(R.id.updvote_list);
-        upvoteRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        projectList = (RecyclerView)findViewById(R.id.project_list);
+        projectList.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<String> testList = new ArrayList<>();
-        testList.add("Hello");
-        testList.add("Does this work");
-        testList.add("It does indeed");
-        testList.add("Hip hip horray");
+        ArrayList<String> projects = new ArrayList<>();
+        projects.add("Maker Space");
+        projects.add("Education");
 
-        UpvoteAdapter adapter = new UpvoteAdapter(testList, this);
-        upvoteRecyclerView.setAdapter(adapter);
+        adapter = new ProjectAdapter(projects, this);
+        projectList.setAdapter(adapter);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
