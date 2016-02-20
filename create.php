@@ -1,5 +1,5 @@
 <?php
-   $dbhost = 'ec2-54-144-242-152.compute-1.amazonaws.com:22';
+   $dbhost = 'ec2-54-144-242-152.compute-1.amazonaws.com';
    $dbuser = 'root';
    $dbpass = 'team6';
    $conn = mysql_connect($dbhost, $dbuser, $dbpass);
