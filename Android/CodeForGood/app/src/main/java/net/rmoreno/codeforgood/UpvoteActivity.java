@@ -4,15 +4,30 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 
 public class UpvoteActivity extends Activity {
+    private static final String URL = "http://ec2-54-144-242-152.compute-1.amazonaws.com:3000";
 
-    RecyclerView upvoteRecyclerView;
+    private RecyclerView upvoteRecyclerView;
+    private UpvoteAdapter adapter;
+    private ArrayList<String> testList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +37,42 @@ public class UpvoteActivity extends Activity {
         upvoteRecyclerView = (RecyclerView) findViewById(R.id.updvote_list);
         upvoteRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<String> testList = new ArrayList<>();
-        testList.add("Hello");
-        testList.add("Does this work");
-        testList.add("It does indeed");
-        testList.add("Hip hip horray");
-
-        UpvoteAdapter adapter = new UpvoteAdapter(testList, this);
+        testList = new ArrayList<>();
+        adapter = new UpvoteAdapter(testList, this);
         upvoteRecyclerView.setAdapter(adapter);
+
+        Bundle bundle = getIntent().getExtras();
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = null;
+        try {
+            url = URL + "/projects/" + URLEncoder.encode(bundle.getString("EXTRA_CLICKED_ITEM"), "UTF-8").replace("+", "%20");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+
+                    for(int i = 0; i<array.length(); i++){
+                        testList.add((String)array.getJSONObject(i).get("CardNames"));
+                    }
+                    adapter.notifyDataSetChanged();
+                }catch(JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("Error", "no response");
+            }
+        });
+
+        queue.add(request);
     }
 
 

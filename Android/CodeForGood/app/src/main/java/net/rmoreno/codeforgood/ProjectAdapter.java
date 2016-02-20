@@ -14,15 +14,6 @@ import java.util.ArrayList;
  * Created by Andy Tran on 2/19/2016.
  */
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView projectName;
-
-        public ViewHolder(View v) {
-            super(v);
-            projectName = (TextView)v.findViewById(R.id.txt_project_name);
-        }
-    }
 
     private ArrayList<String> projects;
     private Context context;
@@ -38,14 +29,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.project_card, parent, false);
 
-        ViewHolder holder = new ViewHolder(v);
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, UpvoteActivity.class);
-                context.startActivity(intent);
-            }
-        });
+        ViewHolder holder = new ViewHolder(v, context, projects);
 
         return holder;
     }
@@ -58,5 +42,31 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
     @Override
     public int getItemCount() {
         return projects.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        public TextView projectName;
+        private Context context;
+        private ArrayList<String> projects;
+
+        public ViewHolder(View v, Context context, ArrayList<String> projects) {
+            super(v);
+            this.context = context;
+            this.projects = projects;
+            this.projectName = (TextView)v.findViewById(R.id.txt_project_name);
+
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            // here you use position
+            int position = getPosition();
+
+            Intent intent = new Intent(context, UpvoteActivity.class);
+            intent.putExtra("EXTRA_CLICKED_ITEM", projects.get(position));
+            context.startActivity(intent);
+        }
     }
 }
