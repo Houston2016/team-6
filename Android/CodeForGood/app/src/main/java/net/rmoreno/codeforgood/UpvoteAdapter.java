@@ -25,6 +25,7 @@ public class UpvoteAdapter extends RecyclerView.Adapter<UpvoteAdapter.ViewHolder
             super(v);
             mName = (TextView)v.findViewById(R.id.name_text);
             mIcon = (ImageView)v.findViewById(R.id.upvote);
+
         }
     }
 
@@ -51,8 +52,16 @@ public class UpvoteAdapter extends RecyclerView.Adapter<UpvoteAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mName.setText(names.get(position));
         //Typeface reminiscence = Typeface.createFromAsset(context.getAssets(), "fonts/Existence-Light.ttf");
-    }
+        holder.mIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.vote));
 
+        final ImageView icon = holder.mIcon;
+        holder.mIcon.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                icon.setImageDrawable(context.getResources().getDrawable(R.drawable.non_vote));
+            }
+        });
+    }
     @Override
     public int getItemCount() {
         return names.size();
