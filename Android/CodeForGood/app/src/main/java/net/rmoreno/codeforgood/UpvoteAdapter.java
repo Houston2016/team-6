@@ -55,10 +55,17 @@ public class UpvoteAdapter extends RecyclerView.Adapter<UpvoteAdapter.ViewHolder
         holder.mIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.vote));
 
         final ImageView icon = holder.mIcon;
+        final boolean highlighted = false;
         holder.mIcon.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                icon.setImageDrawable(context.getResources().getDrawable(R.drawable.non_vote));
+                if(highlighted == false){
+                    icon.setImageDrawable(context.getResources().getDrawable(R.drawable.non_vote));
+
+                } else if(highlighted == true){
+
+                }
+
             }
         });
     }

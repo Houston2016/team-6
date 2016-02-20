@@ -1,12 +1,16 @@
 package net.rmoreno.codeforgood;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.melnykov.fab.FloatingActionButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -73,6 +77,16 @@ public class UpvoteActivity extends Activity {
         });
 
         queue.add(request);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.attachToRecyclerView(upvoteRecyclerView);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UpvoteActivity.this, ThanksActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
