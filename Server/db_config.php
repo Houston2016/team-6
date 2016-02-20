@@ -1,8 +1,7 @@
-db_config.php
 <?php
  
 /*
- * All database connection variables
+ * all database connection variables
  */
  
 define('DB_USER', "root"); // db user

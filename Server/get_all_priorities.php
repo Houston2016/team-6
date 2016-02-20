@@ -1,4 +1,3 @@
-get_all_products.php
 <?php
  
 /*
