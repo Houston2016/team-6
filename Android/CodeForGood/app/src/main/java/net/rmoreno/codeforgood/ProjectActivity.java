@@ -1,11 +1,13 @@
 package net.rmoreno.codeforgood;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
@@ -23,7 +25,7 @@ public class ProjectActivity extends Activity {
         projectList = (RecyclerView)findViewById(R.id.project_list);
         projectList.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<String> projects = new ArrayList<>();
+        projects = new ArrayList<>();
         projects.add("Maker Space");
         projects.add("Education");
 

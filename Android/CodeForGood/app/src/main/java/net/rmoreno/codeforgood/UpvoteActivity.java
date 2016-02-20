@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 
-public class MainActivity extends Activity {
+public class UpvoteActivity extends Activity {
 
     RecyclerView upvoteRecyclerView;
 
